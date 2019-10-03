@@ -1,7 +1,7 @@
 """
 Computes the Look And Say sequence.
 
-Usage:  python3 lookandsay.py STARTING_NUMBER NUMBER_OF_STEPS
+Usage:  python3 lookandsay.py [RUNTYPE] STARTING_NUMBER NUMBER_OF_STEPS
 
 The Look And Say sequence starts with a given positive integer,
 and each subsequent number is constructed from the digits of the
@@ -23,6 +23,11 @@ is computed from that, and so forth:
     3122211311123113311211131114
 
 Fair warning: by about 45, entries have thousands or millions of digits.
+
+Valid Runtypes:
+    --naive
+    #--buffer #TODO
+    --bufgen
 
 This is meant to be used for some benchmarks, which are described
 in the README.
@@ -155,15 +160,51 @@ def run_with_buffer_and_generators(start, order):
     finally:
         pass
 
+def run_buffer(start, order):
+    print("Buffer runtype not implemented")
+    sys.exit(1)
+
 def run_naive(start, order):
     current = start
     for _ in range(order):
         current = look_and_say_next(current)
         print(current)
 
+RUNTYPE_NAIVE = '--naive'
+RUNTYPE_BUFFER = '--buffer'
+RUNTYPE_BUF_AND_GEN = '--bufgen'
+
+RUNTYPES = (
+    RUNTYPE_NAIVE,
+    RUNTYPE_BUFFER,
+    RUNTYPE_BUF_AND_GEN,
+)
+
+RUNTYPE_DEFAULT = RUNTYPE_NAIVE
+
+USAGE_MSG = """
+    Usage:
+        python3 lookandsay.py [RUNTYPE] STARTING_NUMBER NUMBER_OF_STEPS
+        python3 lookandsay.py --help
+    Example:
+        python3 lookandsay.py 1223334444 5
+"""
 
 if __name__ == '__main__':
-    start, order = sys.argv[1], int(sys.argv[2])
+    runtype = RUNTYPE_DEFAULT
+    args = sys.argv[1:]
+    if "-h" in args or "--help" in args:
+        print(__doc__)
+        sys.exit(0)
+
+    if args[0] in RUNTYPES:
+        runtype = args[0]
+        args = args[1:]
+
+    if len(args) != 2:
+        print(USAGE_MSG)
+        sys.exit(1)
+    start, order = args[0], int(args[1])
     # cur = io.StringIO(start)
     # # seq = look_and_say_seq_str(start)
     # # for _ in range(order):
@@ -200,5 +241,12 @@ if __name__ == '__main__':
     #     #print("memostr cache: ", memostr.cache)
     #     pass
 
-    #run_with_buffer_and_generators(start, order)
-    run_naive(start, order)
+    if runtype == RUNTYPE_NAIVE:
+        run_naive(start, order)
+    elif runtype == RUNTYPE_BUF_AND_GEN:
+        run_with_buffer_and_generators(start, order)
+    elif runtype == RUNTYPE_BUFFER:
+        run_buffer(start, order)
+    else:
+        print(f"Unknown runtype: {runtype}\nValid types: {RUNTYPES}")
+        sys.exit(1)
