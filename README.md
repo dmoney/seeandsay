@@ -32,5 +32,3 @@ Initially I misinterpreted the Look And Say problem, and instead counted total o
     $ python3 randomstrings.py 45 100 | time python3 seeandsay.py
 
 Runtime for this incorrect interpretation was .06 seconds.
-
-I also collected some of these thoughts in a twitter thread: https://twitter.com/cathodion/status/1179501638110851072
