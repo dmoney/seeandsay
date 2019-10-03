@@ -139,7 +139,7 @@ def characters(stringbuf):
             break
         yield c
 
-def run_default(start, order):
+def run_with_buffer_and_generators(start, order):
     cur = start
     curbuf = io.StringIO(cur)
     curbuf.seek(0)
@@ -201,4 +201,4 @@ if __name__ == '__main__':
     #     #print("memostr cache: ", memostr.cache)
     #     pass
 
-    run_default(start, order)
+    run_with_buffer_and_generators(start, order)
