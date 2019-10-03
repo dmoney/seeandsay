@@ -113,10 +113,8 @@ def look_and_say_seq_from_seq(digits):
     current_digit = None
     current_count = 0
     for digit in digits:
-        #print("DIGIT: ", digit)
         if current_digit is None:
             current_digit = digit
-        #print("in loop: ", (current_count, current_digit))
         if digit == current_digit:
             current_count += 1
         else:
@@ -124,7 +122,6 @@ def look_and_say_seq_from_seq(digits):
             yield current_digit
             current_count = 1
             current_digit = digit
-    #print("out of loop: ", (current_count, current_digit))
     if current_digit is not None:
         yield memostr(current_count)
         yield current_digit
@@ -146,7 +143,6 @@ def run_with_buffer_and_generators(start, order):
     nextbuf = io.StringIO()
     try:
         for _ in range(order):
-            # print("curbuf: ", curbuf.getvalue())
             curbuf.seek(0)
             next = look_and_say_seq_from_seq(characters(curbuf))
             for d in next:
@@ -155,12 +151,15 @@ def run_with_buffer_and_generators(start, order):
             print()
             curbuf.truncate()
             curbuf.seek(0)
-            # curbuf = nextbuf
-            # nextbuf = io.StringIO()
             nextbuf, curbuf = curbuf, nextbuf
     finally:
-        #print("memostr cache: ", memostr.cache)
         pass
+
+def run_naive(start, order):
+    current = start
+    for _ in range(order):
+        current = look_and_say_next(current)
+        print(current)
 
 
 if __name__ == '__main__':
@@ -201,4 +200,5 @@ if __name__ == '__main__':
     #     #print("memostr cache: ", memostr.cache)
     #     pass
 
-    run_with_buffer_and_generators(start, order)
+    #run_with_buffer_and_generators(start, order)
+    run_naive(start, order)
