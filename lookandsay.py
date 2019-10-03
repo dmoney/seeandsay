@@ -139,22 +139,7 @@ def characters(stringbuf):
             break
         yield c
 
-if __name__ == '__main__':
-    start, order = sys.argv[1], int(sys.argv[2])
-    # cur = io.StringIO(start)
-    # # seq = look_and_say_seq_str(start)
-    # # for _ in range(order):
-    # #     print(next(seq))
-    # for _ in range(order):
-    #     next = look_and_say_next_str(cur)
-    #     print(next.getvalue())
-    #     cur.close()
-    #     cur = next
-    # try:
-    #     cur.close()
-    # except:
-    #     pass
-
+def run_default(start, order):
     cur = start
     curbuf = io.StringIO(cur)
     curbuf.seek(0)
@@ -176,3 +161,44 @@ if __name__ == '__main__':
     finally:
         #print("memostr cache: ", memostr.cache)
         pass
+
+
+if __name__ == '__main__':
+    start, order = sys.argv[1], int(sys.argv[2])
+    # cur = io.StringIO(start)
+    # # seq = look_and_say_seq_str(start)
+    # # for _ in range(order):
+    # #     print(next(seq))
+    # for _ in range(order):
+    #     next = look_and_say_next_str(cur)
+    #     print(next.getvalue())
+    #     cur.close()
+    #     cur = next
+    # try:
+    #     cur.close()
+    # except:
+    #     pass
+
+    # cur = start
+    # curbuf = io.StringIO(cur)
+    # curbuf.seek(0)
+    # nextbuf = io.StringIO()
+    # try:
+    #     for _ in range(order):
+    #         # print("curbuf: ", curbuf.getvalue())
+    #         curbuf.seek(0)
+    #         next = look_and_say_seq_from_seq(characters(curbuf))
+    #         for d in next:
+    #             sys.stdout.write(d)
+    #             nextbuf.write(d)
+    #         print()
+    #         curbuf.truncate()
+    #         curbuf.seek(0)
+    #         # curbuf = nextbuf
+    #         # nextbuf = io.StringIO()
+    #         nextbuf, curbuf = curbuf, nextbuf
+    # finally:
+    #     #print("memostr cache: ", memostr.cache)
+    #     pass
+
+    run_default(start, order)
