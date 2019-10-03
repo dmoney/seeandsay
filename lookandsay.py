@@ -18,9 +18,9 @@ is computed from that, and so forth:
     $ python3 lookandsay.py 1223334444 5
     11223344
     21222324
-    121132131234
-    1112211312111311121314
-    3122211311123113311211131114
+    121132131214
+    1112211312111311121114
+    312221131112311331123114
 
 Fair warning: by about 45, entries have thousands or millions of digits.
 
@@ -154,8 +154,8 @@ def run_with_buffer_and_generators(start, order):
                 sys.stdout.write(d)
                 nextbuf.write(d)
             print()
-            curbuf.truncate()
             curbuf.seek(0)
+            curbuf.truncate()
             nextbuf, curbuf = curbuf, nextbuf
     finally:
         pass
@@ -204,6 +204,7 @@ if __name__ == '__main__':
     if len(args) != 2:
         print(USAGE_MSG)
         sys.exit(1)
+
     start, order = args[0], int(args[1])
     # cur = io.StringIO(start)
     # # seq = look_and_say_seq_str(start)
