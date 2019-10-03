@@ -28,9 +28,9 @@ class TestLookAndSay(unittest.TestCase):
         outstr = subprocess.check_output("python3 lookandsay.py --bufgen 1223334444 5".split())
         self.assertEqual(EXPECTED_OUTPUT, outstr)
 
-    # def test_lookandsay_order5_bufferRuntype(self):
-    #     outstr = subprocess.check_output("python3 lookandsay.py --buffer 1223334444 5".split())
-    #     self.assertEqual(EXPECTED_OUTPUT, outstr)
+    def test_lookandsay_order5_bufferRuntype(self):
+        outstr = subprocess.check_output("python3 lookandsay.py --buffer 1223334444 5".split())
+        self.assertEqual(EXPECTED_OUTPUT, outstr)
 
 if __name__ == '__main__':
     unittest.main()

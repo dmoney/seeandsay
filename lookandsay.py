@@ -26,7 +26,7 @@ Fair warning: by about 45, entries have thousands or millions of digits.
 
 Valid Runtypes:
     --naive
-    #--buffer #TODO
+    --buffer
     --bufgen
 
 This is meant to be used for some benchmarks, which are described
@@ -161,8 +161,19 @@ def run_with_buffer_and_generators(start, order):
         pass
 
 def run_buffer(start, order):
-    print("Buffer runtype not implemented")
-    sys.exit(1)
+    cur = io.StringIO(start)
+    # seq = look_and_say_seq_str(start)
+    # for _ in range(order):
+    #     print(next(seq))
+    for _ in range(order):
+        next = look_and_say_next_str(cur)
+        print(next.getvalue())
+        cur.close()
+        cur = next
+    try:
+        cur.close()
+    except:
+        pass
 
 def run_naive(start, order):
     current = start
@@ -206,41 +217,6 @@ if __name__ == '__main__':
         sys.exit(1)
 
     start, order = args[0], int(args[1])
-    # cur = io.StringIO(start)
-    # # seq = look_and_say_seq_str(start)
-    # # for _ in range(order):
-    # #     print(next(seq))
-    # for _ in range(order):
-    #     next = look_and_say_next_str(cur)
-    #     print(next.getvalue())
-    #     cur.close()
-    #     cur = next
-    # try:
-    #     cur.close()
-    # except:
-    #     pass
-
-    # cur = start
-    # curbuf = io.StringIO(cur)
-    # curbuf.seek(0)
-    # nextbuf = io.StringIO()
-    # try:
-    #     for _ in range(order):
-    #         # print("curbuf: ", curbuf.getvalue())
-    #         curbuf.seek(0)
-    #         next = look_and_say_seq_from_seq(characters(curbuf))
-    #         for d in next:
-    #             sys.stdout.write(d)
-    #             nextbuf.write(d)
-    #         print()
-    #         curbuf.truncate()
-    #         curbuf.seek(0)
-    #         # curbuf = nextbuf
-    #         # nextbuf = io.StringIO()
-    #         nextbuf, curbuf = curbuf, nextbuf
-    # finally:
-    #     #print("memostr cache: ", memostr.cache)
-    #     pass
 
     if runtype == RUNTYPE_NAIVE:
         run_naive(start, order)
