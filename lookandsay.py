@@ -1,3 +1,33 @@
+"""
+Computes the Look And Say sequence.
+
+Usage:  python3 lookandsay.py STARTING_NUMBER NUMBER_OF_STEPS
+
+The Look And Say sequence starts with a given positive integer,
+and each subsequent number is constructed from the digits of the
+previous one.  For example,
+
+    python3 lookandsay.py 1223334444 5
+
+To describe the number 1223334444, you might say that it has
+one 1, two 2's, three 3's, followed by four 4's.
+
+So you could express it as 11223344.  And the next step
+is computed from that, and so forth:
+
+    $ python3 lookandsay.py 1223334444 5
+    11223344
+    21222324
+    121132131234
+    1112211312111311121314
+    3122211311123113311211131114
+
+Fair warning: by about 45, entries have thousands or millions of digits.
+
+This is meant to be used for some benchmarks, which are described
+in the README.
+"""
+
 import sys, io
 
 def look_and_say_next(i):

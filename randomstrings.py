@@ -1,5 +1,23 @@
 #!/usr/bin/env python3
 
+"""
+Usage: ./randomstrings.py N M
+
+Produces N lines of up to M random decimal digits.
+E.g.:
+
+    ./randomstrings 10 5
+
+produces 10 lines of up to 5 digits each.  A line may
+have fewer digits because leading zeroes are not displayed.
+
+This is used to feed ./seeandsay.py, which counts occurrences
+of each digit, per line.
+
+You are probably looking for lookandsay.py, which does something else.
+See the README for what this is all about.
+"""
+
 import sys, random
 
 def main(num_ints, num_digits):
