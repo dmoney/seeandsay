@@ -38,6 +38,7 @@ Runtime for this incorrect interpretation was .06 seconds.
 * `lookandsay.py` will run one of the various methods of computing the Look And Say sequence (which I call a `runtype`), and print its output to the console, one sequency entry on each line (note: a "line" might be millions of digits long).  Use the `-h` or `--help` command line option to see the expected command line parameters.  benchmark and verify run this script, but consume its output, so it's not visible.
 * `verify.py` will run some tests to verify that the various runtypes are working for a small number of iterations (currently 5).
 * `benchmark.py` will time each runtype and print out the times in h:mm:ss.xxxxxx format:
+      
       running: --naive
       Realtime: 0:01:46.429140
 
