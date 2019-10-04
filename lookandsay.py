@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 """
 Computes the Look And Say sequence.
 
@@ -208,13 +210,13 @@ if __name__ == '__main__':
         print(__doc__)
         sys.exit(0)
 
+    if len(args) < 2:
+        print(USAGE_MSG)
+        sys.exit(1)
+
     if args[0] in RUNTYPES:
         runtype = args[0]
         args = args[1:]
-
-    if len(args) != 2:
-        print(USAGE_MSG)
-        sys.exit(1)
 
     start, order = args[0], int(args[1])
 

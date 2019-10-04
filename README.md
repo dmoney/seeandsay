@@ -32,3 +32,24 @@ Initially I misinterpreted the Look And Say problem, and instead counted total o
     $ python3 randomstrings.py 45 100 | time python3 seeandsay.py
 
 Runtime for this incorrect interpretation was .06 seconds.
+
+## Scripts
+
+* `lookandsay.py` will run one of the various methods of computing the Look And Say sequence (which I call a `runtype`), and print its output to the console, one sequency entry on each line (note: a "line" might be millions of digits long).  Use the `-h` or `--help` command line option to see the expected command line parameters.  benchmark and verify run this script, but consume its output, so it's not visible.
+* `verify.py` will run some tests to verify that the various runtypes are working for a small number of iterations (currently 5).
+* `benchmark.py` will time each runtype and print out the times in h:mm:ss.xxxxxx format:
+      running: --naive
+      Realtime: 0:01:46.429140
+
+      running: --buffer
+      Realtime: 0:00:02.413995
+
+      running: --bufgen
+      Realtime: 0:00:03.607056
+  The `--naive` runtype is currently taking longer than it used to, due to some change I made before putting everything in version control.  
+* `seeandsay.py` runs my original, incorrect interpretation of the Look And Say problem.  I might remove this one.  This reads a sequence of strings from standard input.
+* `randomstrings.py` prints a sequence of positive integers of up to 100 random digits.  It takes 2 parameters: the number of lines and the maximum number digits.  This is only needed by seeandsay.py, so it might also be removed.
+
+These scripts start with shebang lines, so on unix-like systems you can invoke them with `./<name-of-script>` instead of typing `python3 <name-of-script>`.  You may need to type `chmod u+x <name-of-script>` to set it to executable.
+
+So far I've only tested this on MacOS, so there may be minor changes needed on Windows.

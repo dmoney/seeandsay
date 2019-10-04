@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 """
 Reads strings of digits from standard input, each on its own line.
 Counts the occurrences of each digit in a given string, and prints
