@@ -21,6 +21,8 @@ The authors of the article used the sequence starting with `1223334444`, and com
 
 My code for computing this sequence is in `lookandsay.py`.  It contains several methods of computing this sequence.  A naive implementation did indeed run in about 45 seconds on my mid-2014 MacBook Pro (3GHz i7 with 16 GB ram; the authors use an i7 2.8 GHz Mac of some kind, but I don't know the year)  The fastest version of the code I was able to write, using Python's built in `io.StringIO` buffer class (but not the one using generator functions) ran in about 2.5 seconds, while the one with generators took about 5 seconds.  About 2 seconds of this is IO.  I was printing everything to the terminal, which I know is fairly slow.  I believe the authors were writing to a file.  I haven't tried that yet.
 
+**Update:** The slowness of the naive implementation was due to unnecessarily converting between giant ints and strings at every iteration (which Python handles without complaint, by the way, it just takes a while).  After removing this unnecessary conversion, the naive implementation is now the fastest, but still takes 2.45 seconds.  If you still want it to be slow in this way, you can uncomment the appropriate line in `run_naive()`.
+
 Further tools for optimization that I may explore at some point include profiling and Cython.  I don't see a reason why this shouldn't in principle  be able to approximately match Java's time of .05 seconds.  However the developer time needed to do such optimizations shouldn't be ignored; on the other hand, neither should the rarity or frequency of such performance needs for a given problem domain.  Oftentimes, Python is plenty fast and your bottleneck, if you have one, is IO.
 
 Timing was initially done using the unix time command (but this isn't necessary with `benchmark.py`, which was added later):
@@ -40,14 +42,14 @@ Runtime for this incorrect interpretation was .06 seconds.
 * `benchmark.py` will time each runtype and print out the times in h:mm:ss.xxxxxx format:
 
       running: --naive
-      Realtime: 0:01:46.429140
+      Realtime: 0:00:02.456405
 
       running: --buffer
-      Realtime: 0:00:02.413995
+      Realtime: 0:00:02.597590
 
       running: --bufgen
-      Realtime: 0:00:03.607056
-  The `--naive` runtype is currently taking longer than it used to, due to some change I made before putting everything in version control.  
+      Realtime: 0:00:03.722954
+
 * `seeandsay.py` runs my original, incorrect interpretation of the Look And Say problem.  I might remove this one.  This reads a sequence of strings from standard input.
 * `randomstrings.py` prints a sequence of positive integers of up to 100 random digits.  It takes 2 parameters: the number of lines and the maximum number digits.  This is only needed by seeandsay.py, so it might also be removed.
 

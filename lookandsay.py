@@ -39,9 +39,9 @@ import sys, io
 
 def look_and_say_next(i):
     counts = []
-    current_digit = int(str(i)[0])
+    current_digit = i[0]
     current_length = 0
-    for digit in (int(d) for d in str(i)):
+    for digit in i:
         if digit == current_digit:
             current_length += 1
         else:
@@ -54,7 +54,7 @@ def look_and_say_next(i):
     outstr = ""
     for c in counts:
         outstr += str(c[0]) + str(c[1])
-    return int(outstr)
+    return outstr
 
 
 def look_and_say_seq(i):
@@ -178,9 +178,13 @@ def run_buffer(start, order):
         pass
 
 def run_naive(start, order):
-    current = start
+    current = str(start)
     for _ in range(order):
         current = look_and_say_next(current)
+
+        # # uncomment to make slow
+        # current = str(int(current))
+
         print(current)
 
 RUNTYPE_NAIVE = '--naive'
@@ -215,6 +219,9 @@ if __name__ == '__main__':
         sys.exit(1)
 
     if args[0] in RUNTYPES:
+        if len(args) < 3:
+            print(USAGE_MSG)
+            sys.exit(1)
         runtype = args[0]
         args = args[1:]
 
