@@ -170,6 +170,18 @@ def run_buffer(start, order):
     for _ in range(order):
         next = look_and_say_next_str(cur)
         print(next.getvalue())
+
+        # # One might think writing directly from
+        # # the buffer would speed things up.  One
+        # # would be wrong.
+        # next.seek(0)
+        # while True:
+        #     c = next.read(1)
+        #     if c == '':
+        #         print()
+        #         break
+        #     sys.stdout.write(c)
+
         cur.close()
         cur = next
     try:
